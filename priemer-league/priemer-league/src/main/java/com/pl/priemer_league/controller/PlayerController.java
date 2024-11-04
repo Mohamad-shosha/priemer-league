@@ -17,8 +17,8 @@ import java.util.Optional;
 public class PlayerController {
     private final PlayerService playerService;
 
-    public PlayerController(PlayerService playerService1) {
-        this.playerService = playerService1;
+    public PlayerController(PlayerService playerService) {
+        this.playerService = playerService;
     }
 
     @GetMapping("/Players")
@@ -29,7 +29,6 @@ public class PlayerController {
     @DeleteMapping("/delete/{playerName}")
     public void delete(@PathVariable String playerName) {
         playerService.deleteByPlayerName(playerName);
-        log.info("Deleted player " + playerName);
     }
 
     @GetMapping("/players/{playerName}")
@@ -37,5 +36,9 @@ public class PlayerController {
         return playerService.findPlayersByTeamName(playerName);
     }
 
+    @GetMapping("/NumberOfMatches/{playerName}")
+    public int getNumberOfMatches(@PathVariable String playerName) throws NotFoundPlayer {
+        return playerService.findMatchesPlayedByPlayerName(playerName);
+    }
 
 }

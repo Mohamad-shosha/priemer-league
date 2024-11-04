@@ -30,6 +30,7 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public void deleteByPlayerName(String playerName) {
         playerRepository.deleteByPlayerName(playerName);
+        log.info("Player with name {} was deleted", playerName);
     }
 
     @Override
@@ -54,5 +55,18 @@ public class PlayerServiceImpl implements PlayerService {
             log.info("Players with name {} found", teamName);
             return players;
         }
+    }
+
+    @Override
+    public Integer findMatchesPlayedByPlayerName(String playerName) throws NotFoundPlayer {
+        Integer matchesPlayed;
+        if (findByPlayerName(playerName).isPresent()) {
+            matchesPlayed = playerRepository.getNumberOfMatchesByPlayerName(playerName);
+            log.info("Player with name {} found", playerName);
+        } else {
+            log.info("Player with name {} was not found", playerName);
+            throw new NotFoundPlayer("Player with name " + playerName + " was not found");
+        }
+        return matchesPlayed;
     }
 }

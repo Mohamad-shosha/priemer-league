@@ -17,4 +17,6 @@ public interface PlayerService {
 
     List<Player> findPlayersByTeamName(String teamName) throws NotFoundPlayer;
 
+    Integer findMatchesPlayedByPlayerName(String playerName) throws NotFoundPlayer;
+
 }

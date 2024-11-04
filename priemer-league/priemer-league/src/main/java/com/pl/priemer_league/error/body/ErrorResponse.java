@@ -6,15 +6,9 @@ import lombok.Value;
 
 import java.sql.Timestamp;
 
-@Value
 @Builder
-public class ErrorResponse {
-    Integer code;
-    String message;
-    String details;
-    Timestamp timestamp;
-
-    public ErrorResponse(Integer code, String message, String details , Timestamp timestamp) {
+public record ErrorResponse(Integer code, String message, String details, Timestamp timestamp) {
+    public ErrorResponse(Integer code, String message, String details, Timestamp timestamp) {
         this.code = code;
         this.message = message;
         this.details = details;

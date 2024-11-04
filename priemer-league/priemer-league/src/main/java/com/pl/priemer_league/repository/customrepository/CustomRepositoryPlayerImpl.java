@@ -25,4 +25,12 @@ public class CustomRepositoryPlayerImpl implements CustomRepositoryPlayer {
         Query query = entityManager.createQuery(sql);
         return query.getResultList();
     }
+
+    @Override
+    public Integer getNumberOfMatchesByPlayerName(String playerName) {
+        String sql = "SELECT p.matchesPlayed FROM Player p WHERE p.playerName = :playerName";
+        Query query = entityManager.createQuery(sql);
+        query.setParameter("playerName", playerName);
+        return (Integer) query.getSingleResult();
+    }
 }
