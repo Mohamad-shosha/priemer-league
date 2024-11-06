@@ -19,4 +19,12 @@ public interface PlayerService {
 
     Integer findMatchesPlayedByPlayerName(String playerName) throws NotFoundPlayer;
 
+    Double findYellowCardsByPlayerName(String playerName) throws NotFoundPlayer;
+
+    void savePlayer(Player player);
+
+    Player updatePlayerStats(String playerName, Player updatedPlayer) throws NotFoundPlayer;
+
+    List<Player> findTopScorers(int limit);
+
 }

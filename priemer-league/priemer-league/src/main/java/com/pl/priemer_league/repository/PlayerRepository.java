@@ -18,4 +18,8 @@ public interface PlayerRepository extends JpaRepository<Player, Long>, CustomRep
     void deleteByPlayerName(String playerName);
 
     List<Player> findPlayersByTeamName(String TeamName);
+
+    boolean existsByPlayerName(String playerName);
+
+    List<Player> findTopScorers(int limit);
 }
