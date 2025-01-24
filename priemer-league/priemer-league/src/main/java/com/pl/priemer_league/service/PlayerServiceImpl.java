@@ -49,7 +49,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public List<Player> findPlayersByTeamName(String teamName) throws NotFoundPlayer {
-        List<Player> players = playerRepository.findPlayersByTeamName(teamName);
+        List<Player> players = playerRepository.getPlayersFromTeamName(teamName);
         if (players.isEmpty()) {
             throw new NotFoundPlayer("No players found for the team");
         } else {
