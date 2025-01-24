@@ -3,6 +3,8 @@ package com.pl.priemer_league.repository;
 import com.pl.priemer_league.model.entity.Player;
 import com.pl.priemer_league.repository.customrepository.CustomRepositoryPlayer;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -60,5 +62,6 @@ public interface PlayerRepository extends JpaRepository<Player, Long>, CustomRep
      * @param limit the number of top scorers to retrieve.
      * @return a list of top-scoring {@link Player} entities.
      */
-    List<Player> findTopScorers(int limit);
+    @Query("SELECT p FROM Player p ORDER BY p.goals DESC")
+    List<Player> findTopScorers(@Param("limit") int limit);
 }

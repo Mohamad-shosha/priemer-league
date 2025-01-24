@@ -2,6 +2,7 @@ package com.pl.priemer_league.repository.customrepository;
 
 import com.pl.priemer_league.error.exceptions.NotFoundPlayer;
 import com.pl.priemer_league.model.entity.Player;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
