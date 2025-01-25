@@ -1,5 +1,6 @@
 package com.pl.priemer_league.repository;
 
+import com.pl.priemer_league.error.exceptions.NotFoundPlayer;
 import com.pl.priemer_league.model.entity.Player;
 import com.pl.priemer_league.repository.customrepository.CustomRepositoryPlayer;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -64,4 +65,5 @@ public interface PlayerRepository extends JpaRepository<Player, Long>, CustomRep
      */
     @Query("SELECT p FROM Player p ORDER BY p.goals DESC")
     List<Player> findTopScorers(@Param("limit") int limit);
+
 }

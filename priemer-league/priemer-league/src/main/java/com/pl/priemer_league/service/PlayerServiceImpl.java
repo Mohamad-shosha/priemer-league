@@ -87,4 +87,14 @@ public class PlayerServiceImpl implements PlayerService {
     public List<Player> findTopScorers(int limit) {
         return playerRepository.findTopScorers(limit);
     }
+
+    @Override
+    public double getExpectedGoalsToPlayer(String playerName) throws NotFoundPlayer {
+        Optional<Player> player = findByPlayerName(playerName);
+        if (player.isPresent()) {
+            return playerRepository.findExpectedGoalsByPlayerName(playerName);
+        } else {
+            throw new NotFoundPlayer("Player not found");
+        }
+    }
 }

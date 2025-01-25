@@ -2,11 +2,11 @@ package com.pl.priemer_league.service;
 
 import com.pl.priemer_league.error.exceptions.NotFoundPlayer;
 import com.pl.priemer_league.model.entity.Player;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public interface PlayerService {
 
@@ -70,7 +70,7 @@ public interface PlayerService {
     /**
      * Updates the stats (matches played and yellow cards) of an existing player.
      *
-     * @param playerName the name of the player whose stats are to be updated.
+     * @param playerName    the name of the player whose stats are to be updated.
      * @param updatedPlayer the player entity containing the updated stats.
      * @return the updated player entity after saving the changes.
      * @throws NotFoundPlayer if the player with the given name is not found.
@@ -84,4 +84,6 @@ public interface PlayerService {
      * @return a list of players who are the top scorers in the league.
      */
     List<Player> findTopScorers(int limit);
+
+    double getExpectedGoalsToPlayer(String playerName) throws NotFoundPlayer;
 }

@@ -5,7 +5,6 @@ import com.pl.priemer_league.model.entity.Player;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -76,4 +75,18 @@ public class CustomRepositoryPlayerImpl implements CustomRepositoryPlayer {
         query.setMaxResults(limit);
         return query.getResultList();
     }
+
+    @Override
+    public double findExpectedGoalsByPlayerName(String playerName) throws NotFoundPlayer {
+        String sql = "SELECT p.expectedGoals FROM Player p WHERE p.playerName = :playerName";
+        Query query = entityManager.createQuery(sql);
+        query.setParameter("playerName", playerName);
+        Double expectedGoals = (Double) query.getSingleResult();
+        if (expectedGoals == null) {
+            throw new NotFoundPlayer("Player not found: " + playerName);
+        } else {
+            return expectedGoals;
+        }
+    }
+
 }

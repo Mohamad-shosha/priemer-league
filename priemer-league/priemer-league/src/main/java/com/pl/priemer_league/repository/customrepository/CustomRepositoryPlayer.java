@@ -2,7 +2,6 @@ package com.pl.priemer_league.repository.customrepository;
 
 import com.pl.priemer_league.error.exceptions.NotFoundPlayer;
 import com.pl.priemer_league.model.entity.Player;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -62,4 +61,7 @@ public interface CustomRepositoryPlayer {
      * @return A list of top players sorted by matches played in descending order.
      */
     List<Player> getTopPlayersByMatches(int limit);
+
+    double findExpectedGoalsByPlayerName(String playerName) throws NotFoundPlayer;
+
 }

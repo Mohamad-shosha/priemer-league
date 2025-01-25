@@ -38,6 +38,10 @@ public class PlayerController {
     public Integer getNumberOfMatches(@PathVariable String playerName) throws NotFoundPlayer {
         return playerService.findMatchesPlayedByPlayerName(playerName);
     }
+    @GetMapping("/ExpectedGoals/{playerName}")
+    public double getNumberOfExpectedGoals(@PathVariable String playerName) throws NotFoundPlayer {
+        return playerService.getExpectedGoalsToPlayer(playerName);
+    }
 
     @GetMapping("/yellow-cards/{playerName}")
     public Double getNumberOfYellowCards(@PathVariable String playerName) throws NotFoundPlayer {
