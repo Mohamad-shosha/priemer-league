@@ -7,13 +7,14 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CustomRepositoryPlayerImpl implements CustomRepositoryPlayer {
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public List<Player> getPlayersFromTeamName(String teamName) {
+    public List<Player> getPlayersByTeamName(String teamName) {
         String sql = "SELECT p FROM Player p WHERE p.teamName = :teamName";
         Query query = entityManager.createQuery(sql);
         query.setParameter("teamName", teamName);
@@ -45,20 +46,7 @@ public class CustomRepositoryPlayerImpl implements CustomRepositoryPlayer {
         String sql = "SELECT p.yellowCards FROM Player p WHERE p.playerName = :playerName";
         Query query = entityManager.createQuery(sql);
         query.setParameter("playerName", playerName);
-
-        Double yellowCards = (Double) query.getSingleResult();
-        if (yellowCards == null) {
-            throw new NotFoundPlayer("Player not found: " + playerName);
-        }
-        return yellowCards;
-    }
-
-    @Override
-    public Player getPlayerStatsByName(String playerName) {
-        String sql = "SELECT p FROM Player p WHERE p.playerName = :playerName";
-        Query query = entityManager.createQuery(sql);
-        query.setParameter("playerName", playerName);
-        return (Player) query.getSingleResult();
+        return (Double) query.getSingleResult();
     }
 
     @Override

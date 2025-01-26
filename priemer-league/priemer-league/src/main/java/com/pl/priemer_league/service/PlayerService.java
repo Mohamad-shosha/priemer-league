@@ -86,4 +86,5 @@ public interface PlayerService {
     List<Player> findTopScorers(int limit);
 
     double getExpectedGoalsToPlayer(String playerName) throws NotFoundPlayer;
+
 }

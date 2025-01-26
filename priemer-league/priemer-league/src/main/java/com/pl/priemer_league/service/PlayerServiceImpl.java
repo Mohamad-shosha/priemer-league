@@ -49,7 +49,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public List<Player> findPlayersByTeamName(String teamName) throws NotFoundPlayer {
-        List<Player> players = playerRepository.getPlayersFromTeamName(teamName);
+        List<Player> players = playerRepository.getPlayersByTeamName(teamName);
         if (players.isEmpty()) {
             throw new NotFoundPlayer("No players found for the team");
         } else {
@@ -66,7 +66,11 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public Double findYellowCardsByPlayerName(String playerName) throws NotFoundPlayer {
         findByPlayerName(playerName);
-        return playerRepository.getNumberOfYellowCardsByPlayerName(playerName);
+        Double playerYellowCards = playerRepository.getNumberOfYellowCardsByPlayerName(playerName);
+        if (playerYellowCards == null) {
+            throw new NotFoundPlayer("Player not found: " + playerName);
+        }
+        return playerYellowCards;
     }
 
     @Override
@@ -97,4 +101,5 @@ public class PlayerServiceImpl implements PlayerService {
             throw new NotFoundPlayer("Player not found");
         }
     }
+
 }

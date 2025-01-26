@@ -4,6 +4,7 @@ import com.pl.priemer_league.error.exceptions.NotFoundPlayer;
 import com.pl.priemer_league.model.entity.Player;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CustomRepositoryPlayer {
     /**
@@ -12,7 +13,7 @@ public interface CustomRepositoryPlayer {
      * @param teamName The name of the team.
      * @return A list of players from the specified team.
      */
-    List<Player> getPlayersFromTeamName(String teamName);
+    List<Player> getPlayersByTeamName(String teamName);
 
     /**
      * Retrieves a list of all players in the league.
@@ -38,14 +39,6 @@ public interface CustomRepositoryPlayer {
      * @throws NotFoundPlayer If the player is not found.
      */
     Double getNumberOfYellowCardsByPlayerName(String playerName) throws NotFoundPlayer;
-
-    /**
-     * Retrieves detailed player statistics (matches played, yellow cards, etc.) by player's name.
-     *
-     * @param playerName The name of the player.
-     * @return A Player object containing the player's statistics, or null if not found.
-     */
-    Player getPlayerStatsByName(String playerName);
 
     /**
      * Retrieves the average number of yellow cards across all players in the league.

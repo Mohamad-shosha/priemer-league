@@ -11,7 +11,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/players")
+@RequestMapping("/PrimerLeague")
 public class PlayerController {
     private final PlayerService playerService;
 
@@ -24,20 +24,27 @@ public class PlayerController {
         return playerService.findAll();
     }
 
-    @GetMapping("/team/{teamName}")
-    public List<Player> getPlayersByTeamName(@PathVariable String teamName) throws NotFoundPlayer {
-        return playerService.findPlayersByTeamName(teamName);
+    @PostMapping("/")
+    public ResponseEntity<Player> createPlayer(@RequestBody Player player) {
+        playerService.savePlayer(player);
+        return ResponseEntity.ok(player);
     }
 
     @GetMapping("/{playerName}")
-    public Player getPlayerByPlayerName(@PathVariable String playerName) throws NotFoundPlayer {
+    public Player getPlayerByName(@PathVariable String playerName) throws NotFoundPlayer {
         return playerService.findByPlayerName(playerName).orElseThrow(() -> new NotFoundPlayer("Player not found"));
+    }
+
+    @GetMapping("/team/{teamName}")
+    public List<Player> getPlayersByTeamName(@PathVariable String teamName) throws NotFoundPlayer {
+        return playerService.findPlayersByTeamName(teamName);
     }
 
     @GetMapping("/matches/{playerName}")
     public Integer getNumberOfMatches(@PathVariable String playerName) throws NotFoundPlayer {
         return playerService.findMatchesPlayedByPlayerName(playerName);
     }
+
     @GetMapping("/ExpectedGoals/{playerName}")
     public double getNumberOfExpectedGoals(@PathVariable String playerName) throws NotFoundPlayer {
         return playerService.getExpectedGoalsToPlayer(playerName);
@@ -53,15 +60,10 @@ public class PlayerController {
         playerService.deleteByPlayerName(playerName);
     }
 
-    @PostMapping("/")
-    public ResponseEntity<Player> createPlayer(@RequestBody Player player) {
-        playerService.savePlayer(player);
-        return ResponseEntity.ok(player);
-    }
-
     @PutMapping("/{playerName}")
     public ResponseEntity<Player> updatePlayer(@PathVariable String playerName, @RequestBody Player player) throws NotFoundPlayer {
         Player updatedPlayer = playerService.updatePlayerStats(playerName, player);
         return ResponseEntity.ok(updatedPlayer);
     }
+
 }
